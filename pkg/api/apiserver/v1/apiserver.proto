@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package v1;
+
+// 导入空消息
+import "google/protobuf/empty.proto";
+import "apiserver/v1/healthz.proto";
+option go_package = "github.com/xiahuaxiahua0616/minehub/pkg/api/apiserver/v1;v1";
+
+service MineHub {
+    rpc Healthz(google.protobuf.Empty) returns (HealthzResponse) {}
+}
+

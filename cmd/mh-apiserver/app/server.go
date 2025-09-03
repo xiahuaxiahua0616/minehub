@@ -24,7 +24,7 @@ func NewMineHubCommand() *cobra.Command {
 	}
 
 	// 推荐使用配置文件来配置应用，便于管理配置项
-	// cmd.PersistentFlags().StringVarP(&configFile, "config", "c", filePath(), "Path to the miniblog configuration file.")
+	cmd.PersistentFlags().StringVarP(&configFile, "config", "c", filePath(), "Path to the miniblog configuration file.")
 	version.AddFlags(cmd.PersistentFlags())
 	// 将 ServerOptions 中的选项绑定到命令标志
 	opts.AddFlags(cmd.PersistentFlags())

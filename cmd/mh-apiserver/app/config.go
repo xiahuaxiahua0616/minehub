@@ -68,3 +68,15 @@ func searchDirs() []string {
 	cobra.CheckErr(err)
 	return []string{filepath.Join(homeDir, defaultHomeDir), "."}
 }
+
+// filePath 获取默认配置文件的完整路径.
+func filePath() string {
+	// 原本是获取根目录的 /root/.wl-apiserver, 不过不方便vscode编码，我改造成放在当前目录下
+	home, err := os.UserHomeDir()
+
+	// pwd, err := os.Getwd()
+
+	// 如果不能获取用户主目录，则记录错误并返回空路径
+	cobra.CheckErr(err)
+	return filepath.Join(home, defaultHomeDir, defaultConfigName)
+}
