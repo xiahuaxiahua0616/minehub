@@ -12,10 +12,10 @@ import (
 
 const (
 	// defaultHomeDir 定义放置 miniblog 服务配置的默认目录。
-	defaultHomeDir = ".miniblog"
+	defaultHomeDir = ".minehub"
 
 	// defaultConfigName 指定 miniblog 服务的默认配置文件名。
-	defaultConfigName = "mb-apiserver.yaml"
+	defaultConfigName = "mh-apiserver.yaml"
 )
 
 // onInitialize 设置需要读取的配置文件名、环境变量，并将其内容读取到 viper 中。
