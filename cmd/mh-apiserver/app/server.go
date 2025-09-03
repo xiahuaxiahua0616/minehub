@@ -4,6 +4,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/xiahuaxiahua0616/minehub/cmd/mh-apiserver/app/options"
+	"github.com/xiahuaxiahua0616/minehub/internal/pkg/log"
 	"github.com/xiahuaxiahua0616/minehub/pkg/version"
 )
 
@@ -35,6 +36,11 @@ func NewMineHubCommand() *cobra.Command {
 
 func run(opts *options.ServerOptions) error {
 	version.PrintAndExitIfRequested()
+
+	// 初始化日志
+	log.Init(logOptions())
+	defer log.Sync()
+
 	if err := viper.Unmarshal(opts); err != nil {
 		return err
 	}
@@ -54,4 +60,24 @@ func run(opts *options.ServerOptions) error {
 	}
 
 	return server.Run()
+}
+
+func logOptions() *log.Options {
+	opts := log.NewOptions()
+	if viper.IsSet("log.disable-caller") {
+		opts.DisableCaller = viper.GetBool("log.disable-caller")
+	}
+	if viper.IsSet("log.disable-stacktrace") {
+		opts.DisableStacktrace = viper.GetBool("log.disable-stacktrace")
+	}
+	if viper.IsSet("log.level") {
+		opts.Level = viper.GetString("log.level")
+	}
+	if viper.IsSet("log.format") {
+		opts.Format = viper.GetString("log.format")
+	}
+	if viper.IsSet("log.output-paths") {
+		opts.OutputPaths = viper.GetStringSlice("log.output-paths")
+	}
+	return opts
 }
